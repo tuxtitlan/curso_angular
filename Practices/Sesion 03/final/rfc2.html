@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Angular ngMessages -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.js"></script>
+<body>
+	<div ng-app="rfcModule">
+		<div ng-controller="rfcController">
+			
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-6 col-md-6">
+						<form name="formaRFC" novalidate>
+							<div class="form-group">
+								<label for="nombreInput">Nombre</label>
+								<input id="nombreInput" name="nombre" ng-model="nombre" ng-minlength="2" ng-maxlength="20" type="text" class="form-control" placeholder="Nombre" required>
+								<div class="help-block" ng-messages="formaRFC.nombre.$error" ng-if="submitted">
+									<div ng-messages-include="inputErrors.html"></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="apellidoPaternoInput">Apellido Paterno</label>
+								<input id="apellidoPaternoInput" name="apellidoPaterno" ng-model="apellidoPaterno" ng-minlength="1" ng-maxlength="20" type="text" class="form-control" placeholder="Apellido Paterno" required>
+								<div class="help-block" 
+									ng-messages="formaRFC.apellidoPaterno.$error" 
+									ng-if="submitted">
+									<div ng-messages-include="inputErrors.html"></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="apellidoMaternoInput">Apellido Materno</label>
+								<input id="apellidoMaternoInput" name="apellidoMaterno" ng-model="apellidoMaterno" ng-minlength="1" ng-maxlength="20" type="text" class="form-control" placeholder="Apellido Materno" required>
+								<div class="help-block" ng-messages="formaRFC.apellidoMaterno.$error" ng-if="submitted">
+									<div ng-messages-include="inputErrors.html"></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="emailInput">Email</label>
+								<input id="emailInput" 
+									name="email" 
+									ng-model="email" 
+									type="email" 
+									class="form-control" 
+									placeholder="Email">
+								<div class="help-block" ng-messages="formaRFC.email.$error" ng-if="submitted">
+									<p ng-message="email">Email no valido</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="diaNacimientoInput">Dia Nacimiento</label>
+										<select id="diaNacimientoInput" name="diaNacimiento" ng-model="diaNacimiento" class="form-control" required>
+											<option>01</option>
+											<option>02</option>
+											<option>03</option>
+											<option>04</option>
+											<option>05</option>
+											<option>06</option>
+											<option>07</option>
+											<option>08</option>
+											<option>09</option>
+											<option>10</option>
+											<option>11</option>
+											<option>12</option>
+											<option>13</option>
+											<option>14</option>
+											<option>15</option>
+											<option>16</option>
+											<option>17</option>
+											<option>18</option>
+											<option>19</option>
+											<option>20</option>
+											<option>21</option>
+											<option>22</option>
+											<option>23</option>
+											<option>24</option>
+											<option>25</option>
+											<option>26</option>
+											<option>27</option>
+											<option>28</option>
+											<option>29</option>
+											<option>30</option>
+											<option>31</option>
+										</select>
+										<div class="help-block" ng-messages="formaRFC.diaNacimiento.$error" ng-if="submitted">
+											<div ng-messages-include="selectErrors.html"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="mesNacimientoInput">Mes Nacimiento</label>
+										<select id="mesNacimientoInput" name="mesNacimiento" ng-model="mesNacimiento" class="form-control" required>
+											<option>01</option>
+											<option>02</option>
+											<option>03</option>
+											<option>04</option>
+											<option>05</option>
+											<option>06</option>
+											<option>07</option>
+											<option>08</option>
+											<option>09</option>
+											<option>10</option>
+											<option>11</option>
+											<option>12</option>											
+										</select>
+										<div class="help-block" ng-messages="formaRFC.mesNacimiento.$error" ng-if="submitted">
+											<div ng-messages-include="selectErrors.html"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="anioNacimientoInput">Año Nacimiento</label>
+										<select id="anioNacimientoInput" name="anioNacimiento" ng-model="anioNacimiento" class="form-control" required>
+											<option>01</option>
+											<option>02</option>
+											<option>03</option>
+											<option>04</option>
+											<option>05</option>
+											<option>06</option>
+											<option>07</option>
+											<option>08</option>
+											<option>09</option>
+											<option>10</option>
+											<option>11</option>
+											<option>12</option>
+											<option>13</option>
+											<option>14</option>
+											<option>15</option>
+											<option>16</option>
+										</select>
+										<div class="help-block" ng-messages="formaRFC.anioNacimiento.$error" ng-if="submitted">
+											<div ng-messages-include="selectErrors.html"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="pull-right">
+								<button 
+									ng-disabled="submitted && formaRFC.$invalid" 
+									ng-click="clickButton()"  
+									class="btn btn-lg btn-primary">Crear</button>
+							</div>
+							
+						</form>
+					</div>
+					<div class="col-xs-6 col-md-6">
+						<div ng-if="formaRFC.$valid && submitted">
+							<h2>RFC creada</h2>
+							<p ng-bind="crearRFC()"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	<script>
+		var rfcModule = angular.module('rfcModule', ['ngMessages']);
+		rfcModule.controller('rfcController', function($scope) {
+			
+			$scope.submitted = false;
+			
+			$scope.crearRFC = function() {
+				var parte1 = $scope.apellidoPaterno.substring(0, 2);
+				var parte2 = $scope.apellidoMaterno.substring(0, 1);
+				var parte3 = $scope.nombre.substring(0, 1);
+				var parte4 = $scope.anioNacimiento;
+				var parte5 = $scope.mesNacimiento;
+				var parte6 = $scope.diaNacimiento;
+				
+				return parte1 + parte2 + parte3 + parte4 + parte5 + parte6 + 'ABC';
+			};
+			
+			$scope.clickButton = function() {
+				if(!$scope.submitted) {
+					$scope.submitted = true;
+				}
+			};
+		});
+	</script>
+
+	<style>
+		.help-block {
+			color: red;
+		}
+	</style>
+	
+</body>
+</html>

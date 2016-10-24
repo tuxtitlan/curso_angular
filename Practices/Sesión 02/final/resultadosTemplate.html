@@ -1,0 +1,74 @@
+<div class="container" ng-app="resultadosDirective">
+	<div class="table-responsive" 
+		ng-controller="resultadosDirectiveController">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th class="text-center">
+						<span>Id</span>
+					</th>
+					<th>
+						<div class="input-group">
+							<input type="text" 
+								ng-model="busqueda" 
+								class="form-control input-sm"
+								placeholder="Nombre">
+							<span class="input-group-btn">
+								<button class="btn btn-sm btn-default" type="button" ng-click="clickSearch()">
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+								</button>
+							</span>
+						</div>
+					</th>
+					<th class="text-center">
+						<span>Departamento</span>
+					</th>
+					<th class="text-center">
+						<span>Sueldo</span>
+					</th>
+					<th class="text-center">
+						<span>Fecha de Nacimiento</span>
+					</th>
+					<th class="text-center">
+						<span>Vencido</span>
+					</th>
+					<th class="text-center">
+						<span>Habilidades</span>
+					</th>
+					<th class="text-center">
+						<span>Debilidades</span>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr 
+					ng-repeat="empleado in personal | filter:{nombre: busqueda}">
+					<th class="text-center" scope="row">{{empleado.id | number}}</th>
+					<td>{{empleado.nombre}}</td>
+					<td class="text-center">{{empleado.departamento}}</td>
+					<td class="text-center">{{empleado.sueldo | currency}}</td>
+					<td class="text-center">
+						{{empleado.fechaNacimiento | date:'dd-MMM-yyyy'}}
+					</td>
+					<td class="text-center">
+						<!-- Aqui se agregara un filtro personalizado para saber si el enemigo ha sido vencido -->
+						{{personal | vencido:empleado.id:false}}
+					</td>
+					<td>
+						<div class="text-center">
+							<p>{{empleado.habilidades.nombre}}</p>								
+						</div>
+					</td>
+					<td>
+						<form class="form-inline">
+							<span ng-repeat="debilidad in empleado.debilidades">
+								{{debilidad.nombre + ' '}}
+								</span>
+							
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

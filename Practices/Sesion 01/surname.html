@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<script 
+	src="http://ajax.googleapis.com/ajax/libs/
+	angularjs/1.4.8/angular.min.js"></script>
+<body>
+    
+    <div
+        ng-app
+        ng-init="
+            person = {
+                firstName: 'Juan',
+                lastName: 'Perez'
+            };         
+        "
+    >
+        <p>The name is: {{person.firstName}}&nbsp;{{person.lastName}}</p>
+        
+        <input ng-model="person.firstName" value={{person.firstName}}>
+    </div>
+
+	<script>
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<body>
+	<div ng-app="resultadosModule">
+		<div ng-controller="resultadosController">
+			<resultados lista-personal="personal" lista-personal-derrotado="personalDerrotado"></resultados>
+		</div>
+	</div>
+
+	<script>
+		var resultadosModule = angular.module('resultadosModule', ['resultadosDirective']);
+		resultadosModule.controller('resultadosController', function($scope, $http) {
+			// Obtencion de datos en el server sobre el personal.
+			var obtenerPersonal = function() {
+				var url = 'personal.json';
+				$http.get(url).success( function(response) {
+					
+					$scope.personal = response;
+					
+					$scope.$broadcast('sendLista', $scope.personal);
+					
+				});
+			};
+			
+			// Inicializacion
+			var inicializacion = function() {
+				obtenerPersonal();
+			};
+			
+			inicializacion();
+			
+		});
+		var resultadosDirective = angular.module('resultadosDirective', ['vencidoFilter'])
+		.directive('resultados', function() {
+			// Definicion de la directiva
+			return {
+				restrict: 					'E',
+				scope: {
+					personal: 				'=listaPersonal'
+				},
+				templateUrl: 				'resultadosTemplate.html'
+			};
+		
+		}).controller('resultadosDirectiveController', function($scope, $filter) {
+			// Logica del controlador de la directiva
+			
+			// Funcion interna para convertir en mayusculas la propiedad dentro de la lista de objetos pasados como parametros
+			var cambiarUppercase = function(lista, propiedad) {
+				
+				// Declaracion del filtro uppercase en el controlador
+				var uppercaseFilter = $filter('uppercase');
+				
+				if(lista) {
+					for(i = 0; i < lista.length; i++) {
+						lista[i][propiedad] = uppercaseFilter( lista[i][propiedad] );
+					}
+					
+					$scope.personal = lista;
+				}
+			};
+			
+			$scope.$on('sendLista', function(event, lista) {
+				// Convertir en mayusculas la propiedad departamento de la lista de personal
+				cambiarUppercase(lista, 'departamento');
+			});
+			
+			$scope.clickSearch = function() {
+				alert('Click en el icono de buscar');
+			};
+		});
+		angular.module('vencidoFilter', [])
+		.filter('vencido', function() {
+			return function(personalDerrotado, id, uppercase) {
+				var bandera = false;
+				var out = '';
+				
+				if(id === "1") {
+					bandera = true;
+				}
+				
+				out = bandera ? 'Si' : 'No';
+				
+				if(uppercase) {
+					out = out.toUpperCase();
+				}
+				
+				return out;
+			};
+		});
+	</script>
+
+</body>
+</html>

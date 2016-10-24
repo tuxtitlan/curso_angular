@@ -1,0 +1,46 @@
+[
+	{
+		"id": "1",
+		"nombre": "Head Hunter",
+		"departamento": "Externo",
+		"sueldo": "8000",
+		"fechaNacimiento": "1474372238940",
+		"habilidades": {
+			"nombre": "Seleccion"
+		},
+		"debilidades": []
+	},
+	{
+		"id": "2",
+		"nombre": "Recursos humanos",
+		"departamento": "RH",
+		"sueldo": "9000",
+		"fechaNacimiento": "1474372238940",
+		"habilidades": {
+			"nombre": "Lenguaje"
+		},
+		"debilidades": [
+			{
+				"nombre": "Seleccion"
+			}
+		]
+	},
+	{
+		"id": "3",
+		"nombre": "Entrevistador tecnico",
+		"departamento": "IT",
+		"sueldo": "10000",
+		"fechaNacimiento": "1474372238940",
+		"habilidades": {
+			"nombre": "Actitud"
+		},
+		"debilidades": [
+			{
+				"nombre": "Seleccion"
+			},
+			{
+				"nombre": "Lenguaje"
+			}
+		]
+	}
+]
