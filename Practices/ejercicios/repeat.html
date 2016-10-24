@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<script 
+	src="http://ajax.googleapis.com/ajax/libs/
+	angularjs/1.4.8/angular.min.js"></script>
+<body>
+    <div ng-app="App" ng-controller="TableCtrl">
+        <ul>
+            <li ng-repeat="user in list">
+                {{user.name}}
+            </li>
+        </ul>
+        
+        <button ng-click="changeUsers()">Change Users</button>
+    </div>
+
+	<script>
+        var App = angular.module('App',[]);
+        App.controller('TableCtrl', function($scope){
+            $scope.list = [
+                {name: 'Juan'},
+                {name: 'Pedro'},
+                {name: 'Pablo'}
+            ];
+            
+            $scope.changeUsers = function () {
+                $scope.list = [
+                    {name: 'Hugo'},
+                    {name: 'Paco'},
+                    {name: 'Luis'}
+                ];
+            }
+        })
+	</script>
+
+</body>
+</html>

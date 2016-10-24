@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<script 
+	src="http://ajax.googleapis.com/ajax/libs/
+	angularjs/1.4.8/angular.min.js"></script>
+<body>
+    <div ng-app='App'>
+        <div ng-controller="ctrl1">
+            <h1 ng-bind="name"></h1>
+        </div>
+        <div ng-controller="ctrl2">
+            <h3 ng-bind="name"></h1>
+        </div>        
+    </div>
+
+	<script>
+        var App = angular.module('App', []);
+        
+        App.controller('ctrl1', function($scope){
+            $scope.name = 'Juan';
+        });
+        
+        App.controller('ctrl2', function($scope){
+            $scope.name = 'Pepe';
+        });
+	</script>
+
+</body>
+</html>
