@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controller="resultadosDirectiveController">
 	<div class="table-responsive">
 		<table class="table table-bordered">
 			<thead>
@@ -7,10 +7,10 @@
 						<span>Id</span>
 					</th>
 					<th>
-						<div class="input-group">
-							<input type="text" class="form-control input-sm" placeholder="Nombre">
+						<div class="input-group" >
+							<input type="text" class="form-control input-sm" placeholder="Nombre" ng-model="busqueda">
 							<span class="input-group-btn">
-								<button class="btn btn-sm btn-default" type="button">
+								<button class="btn btn-sm btn-default" type="button" ng-click="search()">
 									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 								</button>
 							</span>
@@ -37,23 +37,25 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th class="text-center" scope="row"></th>
-					<td></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
+				<tr ng-repeat="persona in personal | filter:busqueda:nombre">
+					<th class="text-center" scope="row">{{persona.id}}</th>
+					<td>{{persona.nombre}}</td>
+					<td class="text-center">{{persona.departamento}}</td>
+					<td class="text-center">{{persona.sueldo|currency}}</td>
+					<td class="text-center">{{persona.fechaNacimiento|date:'dd-MMM-yyyy'}}</td>
 					<td class="text-center">
-						<!-- Aqui se agregara un filtro personalizado para saber si el enemigo ha sido vencido -->
+						{{persona|vencido:persona.id:false}}
 					</td>
 					<td>
 						<div class="text-center">
-							<p></p>								
+							<p>{{persona.habilidades.nombre}}</p>								
 						</div>
 					</td>
 					<td>
 						<form class="form-inline">
-							<span></span>
+							<span ng-repeat="debilidad in persona.debilidades">
+								{{debilidad.nombre}}
+							</span>
 						</form>
 					</td>
 				</tr>
